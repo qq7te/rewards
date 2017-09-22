@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="https://unpkg.com/vue"></script>
+
+
+
+
+<div id="watch-example">
+
+    <table id="where-everything-is" border="5">
+        <transition-group name="list" tag="tr">
+    <todo-item v-for="t in todos" v-bind:todo="t" v-bind:key="t.id">
+
+    </todo-item>
+        </transition-group>
+    </table>
+
+    <p>
+    Enter new item:
+    <form v-on:submit.prevent="sendit">
+       <input v-model="nextItem" >
+    </form>
+    </p>
+</div>
+
+
+<script>
+
+    Vue.component('todo-item', {
+        props: ['todo'],
+        template: '<tr><td align="right"> {{todo.reward }} </td> <td>{{todo.text}} </td></tr>'
+    });
+
+
+    var watchExampleVM = new Vue({
+        el: '#watch-example',
+        data: {
+            todos: [
+                {id: 0, text:'do me', reward:'10'},
+                {id: 1, text:'food shopping', reward:'2'}
+            ],
+
+
+
+            nextItem: '',
+        },
+        methods: {
+            sendit: function() {
+                //this.todos[0].text = 'nooooo';
+                this.todos.push({id:2, text:this.nextItem, reward:'0'})
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
