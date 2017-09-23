@@ -38,6 +38,7 @@
     });
 
 
+    
     var watchExampleVM = new Vue({
         el: '#watch-example',
         data: {
@@ -53,7 +54,10 @@
         methods: {
             sendit: function() {
                 //this.todos[0].text = 'nooooo';
-                this.todos.push({id:2, text:this.nextItem, reward:'0'})
+                var boh = this.nextItem.match(/(.*) (\d+)\s*$/);
+                var rewards = (boh && boh.pop()) || 0;
+                var label = (boh && boh.pop()) || this.nextItem;
+                this.todos.push({id:2, text:label, reward:rewards});
             }
         }
     })
