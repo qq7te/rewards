@@ -27,6 +27,7 @@
        <input v-model="nextItem" >
     </form>
     </p>
+    {{ checked }}
 </div>
 
 
@@ -34,11 +35,23 @@
 
     Vue.component('todo-item', {
         props: ['todo'],
-        template: '<tr><td align="right"> {{todo.reward }} </td> <td>{{todo.text}} </td></tr>'
+        template: '<tr><td> <input type="checkbox" v-model="checked"> </td><td align="right"> {{todo.reward }} </td> <td>{{todo.text}} </td></tr>',
+
+        data: function () {
+            checked: false
+        },
+
+        methods: {
+            clicked: function(event) {
+                console.log("I haz it");
+                // if (event.)
+            }
+        },
+
     });
 
 
-    
+
     var watchExampleVM = new Vue({
         el: '#watch-example',
         data: {
@@ -47,7 +60,7 @@
                 {id: 1, text:'food shopping', reward:'2'}
             ],
 
-
+            //checked: [],
 
             nextItem: '',
         },
@@ -58,7 +71,8 @@
                 var rewards = (boh && boh.pop()) || 0;
                 var label = (boh && boh.pop()) || this.nextItem;
                 this.todos.push({id:2, text:label, reward:rewards});
-            }
+            },
+
         }
     })
 </script>
